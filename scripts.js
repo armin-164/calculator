@@ -73,6 +73,17 @@ let fullvariables = firstvalue != "" && secondvalue != "" && operatorstorage != 
   secondvalue = "";
   operatorstorage ="";
   }
+
+
+// If all variables are full and an operator is pressed,
+// calculate all the current variables, assign to firstvalue,
+// show it in HTML and make secondvalue empty to avoid issues
+if(fullvariables && operatorvalues) {
+  firstvalue = operate(parseFloat(firstvalue), operatorstorage, parseFloat(secondvalue));
+  resultbox.innerText = firstvalue;
+  secondvalue = "";
+}
+
 // If resetbutton is pressed, remove values from firstvalue,
 // secondvalue and operatorstorage
   if (resetbutton) {
@@ -81,6 +92,10 @@ let fullvariables = firstvalue != "" && secondvalue != "" && operatorstorage != 
     operatorstorage ="";
     resultbox.innerText = 0;
   }
+
+  console.log(firstvalue)
+  console.log(secondvalue)
+  console.log(operatorstorage)
   
 }
 
