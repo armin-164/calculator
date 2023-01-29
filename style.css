@@ -1,0 +1,44 @@
+div {
+    border: 1px solid red;
+}
+
+.top {
+    text-align: center;
+}
+
+.calculatorcontainer {
+    margin: 10px 500px;
+    border-radius: 80px;
+}
+
+.firstrowbuttons {
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.firstrowbuttons button {
+    height: 100px;
+    width: 100px;
+    border-radius: 80px;
+    font-size: 40px;;
+}
+
+.firstrowbuttons button:hover {
+    box-shadow: 0 0 15px 1px red;}
+
+.firstrowbuttons > .equalssymbol {
+    width: 215px;
+}
+.firstrowbuttons > .reset {
+    width: 340px;
+}
+
+.result {
+    margin:10px 50px;
+    font-size:xx-large;
+    text-align: right;
+    padding: 0 10px;
+}
