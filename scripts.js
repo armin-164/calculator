@@ -45,16 +45,41 @@ let equalsPress = (e.target.classList.contains("equalssymbol"));
 let resetbutton = (e.target.classList.contains("reset"));
 let fullvariables = firstvalue != "" && secondvalue != "" && operatorstorage != "";
 
- // If number or dot is pressed add it to firstvalue and show it
-  if (numberOrDot && operatorstorage == "") { 
-    firstvalue += e.target.value;
-    resultbox.innerText = firstvalue;
+// If resetbutton is pressed, remove values from firstvalue,
+// secondvalue and operatorstorage
+if (resetbutton) {
+  firstvalue = "";
+  secondvalue = "";
+  operatorstorage ="";
+  resultbox.innerText = 0;
+  return;
+}
+
+ // If number or dot is pressed add it to firstvalue and show
+ // Also restrict amount of dots being used and numbers shown in resultbox
+ if (numberOrDot && operatorstorage == "") { 
+
+      if (firstvalue.includes(".") && e.target.value === "." || firstvalue.length > 22) {
+      return;
+      }
+      else {
+      firstvalue += e.target.value;
+      resultbox.innerText = firstvalue;
+      }
   }
   // If number or dot is pressed and storage is empty,
   // add it to secondvalue and show it
-  else if (numberOrDot && operatorstorage != "") {  
+  // Also restrict amount of dots being used and numbers shown in resultbox
+
+  else if (numberOrDot && operatorstorage != "") {
+
+    if (secondvalue.includes(".") && e.target.value === "." || secondvalue.length > 22) {
+      return;
+      }
+      else {
     secondvalue += e.target.value;
     resultbox.innerText = secondvalue;
+      }
   }
 
  
@@ -69,7 +94,7 @@ let fullvariables = firstvalue != "" && secondvalue != "" && operatorstorage != 
   // assign it to firstvalue and remove the other values from secondvalue
   // and operatorstorage. Allows it to continue
   if (fullvariables && equalsPress) { 
-  firstvalue = operate(parseFloat(firstvalue), operatorstorage, parseFloat(secondvalue));
+  firstvalue = String(operate(parseFloat(firstvalue), operatorstorage, parseFloat(secondvalue)));
   resultbox.innerText = firstvalue;
   secondvalue = "";
   operatorstorage ="";
@@ -80,7 +105,7 @@ let fullvariables = firstvalue != "" && secondvalue != "" && operatorstorage != 
 // calculate all the current variables, assign to firstvalue,
 // show it in HTML and make secondvalue empty to avoid issues
 if(fullvariables && operatorPress) {
-  firstvalue = operate(parseFloat(firstvalue), operatorstorage, parseFloat(secondvalue));
+  firstvalue = String(operate(parseFloat(firstvalue), operatorstorage, parseFloat(secondvalue)));
   resultbox.innerText = firstvalue;
   secondvalue = "";
   operatorstorage = e.target.value;
@@ -94,15 +119,6 @@ if (firstvalue != "" && secondvalue == "" && operatorstorage != "" && equalsPres
   secondvalue ="";
   operatorstorage ="";
 }
-
-// If resetbutton is pressed, remove values from firstvalue,
-// secondvalue and operatorstorage
-  if (resetbutton) {
-    firstvalue = "";
-    secondvalue = "";
-    operatorstorage ="";
-    resultbox.innerText = 0;
-  }
 
 }
 
